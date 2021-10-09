@@ -1,0 +1,10 @@
+<launch>
+    <arg name="user"               default="marina"/>
+    <arg name="record_start_delay" default="12.0"/>
+    <arg name="rigid_body"         default="blimp"/>
+
+    <!-- rosbag record all (radar, motor, OptiTrack) -->
+    <node machine="comp_server" pkg="rosbag" type="record" name="rosbag_record_all"
+        args="record -o /home/$(arg user)/Pi_Git/ros_radar_mine/record_radar_data/all /h_ref /radar_filter /radar_targets /motor_control /$(arg rigid_body)/ground_pose /$(arg rigid_body)/pose"
+        launch-prefix="bash -c 'sleep $(arg record_start_delay); $0 $@' "/>
+</launch>

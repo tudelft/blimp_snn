@@ -1,0 +1,99 @@
+# YAML FILE WITH ALL THE CONFIGURATION PARAMETERS
+
+# Evolution configurations params
+evol:
+    n_sim:        1         # no. simulations per evaluation
+    #T:            [2514,1686,1335,2058,2479,2377]     # duration of each simulation [ms]
+    #h_ref:        [3,2,1,2.5,1.5,3]     # desired altitude (per simulation)
+    #T:            [600,600,600,600,600]     # duration of each simulation [ms]
+    T:            1800
+    h_ref:        [3,2,1,2.5,1.5]     # desired altitude (per simulation)
+    h_init:       0         # starting height (per simulation)
+    u_lim:        10        # Motor command limit for fitness evaluation
+    trace_lim:    100000     # Trace limit for fitness evaluation
+    noise:        0         # [m]. Max noise to add to the "h" signal during simulation. SET TO ZERO FOR NO NOISE
+    ic_condition: 0         # initial condition (altitude)
+    n_pop:        40        # no. individuals per population
+    n_gen:        500        # no. generations
+    p_mut_ind:    0.4      # mut prob of an individual
+    p_mut_param:  0.6       # mut prob of a parameter -> SET TO 1 TO UPDATE ALL OF THEM ALWAYS
+    p_cross:      0         # probability of crossover
+    n_hof:        5         # no. individuals to keep in hall of fame
+    tourn_size:   4        # tournament size (see DEAP selection algorithms)
+    save_gen:     10        # save population + hof every "save_gen" gens
+    rnd_init:     True      # initialize nets randomly (not with static params)
+    plot:         False     # plot results from network
+    save:         True     # save results
+    parallel:     True      # apply parallelization accross computer CPUs
+    q_mut:        True
+    rnd_height:   False
+    easimple:     True      # To select MY (True) algo or JESSE's (False) algo
+    h_lim:        [0,5]
+    paramInput:   ["tau_t", "alpha_t"] # ["tau_t", "alpha_t"]
+    paramLIF:     ["thresh", "tau_v", "tau_t", "alpha_v", "alpha_t"] # ["thresh", "tau_v", "tau_t", "alpha_v", "alpha_t"]
+    
+test:
+    active:       True      
+    test_gen:     20
+    h_ref:        [1,4]
+    h_init:       0
+
+# Main path
+path: save/ANN/
+#path: /home/marina/Pi_Git/ros_radar_mine/neuro_learning/my_nets/saved_SNN/
+
+# Network params
+#n_layers:        [1,3,3,1]
+n_layers:        [10,5,1,1]
+batch_size:      1      # batch size (always 1 in this case)
+
+enc:
+    xmin:        -0.4     # min of encoding interval
+    xmax:        0.4      # max of encoding interval
+    #n_samples:   4     # no. gaussian points in encoding interval
+    sigma:       2      # standard deviation
+    plot:        False  # plot encoding points
+    gaussian:    False
+
+dec:
+    u_pop:       4
+
+# Initialization static params (they do not change in evolution)
+init:
+    q:            2     # thrust param
+    v_rest:       0     # resting voltage
+    thresh:       0.4   # threshold
+    tau_v:        0.9   # decay for voltage
+    tau_t:        0.9   # decay for trace
+    alpha_v:      0.3   # scaling constant for the increase of the voltage by a single spike
+    alpha_t:      1     # scaling constant for the increase of the trace by a single spike
+    dur_refrac:   0     # no. of timesteps the neuron is dormant after spiking
+    dt:           1     # duration of a single timestep [ms]; has to fit "duration_refrac" integer no. times.                      
+    delay:        0     # time it takes for a spike to propagate through the connection; should be an integer multiple of dt.     
+
+# Limits for mutation distributions
+lim:
+    var: 1             # I would not touch this
+    decay: 0.993        # decay per generation for the mutation of the params. On generation N, mutation will be 0.99^N * "clamp" limits
+
+# Full limits to which the params are clamped
+clamp:
+    thresh:       [0, 1]
+    tau_v:        [0, 1]
+    tau_t:        [0, 1]
+    alpha_v:      [0, 3]
+    alpha_t:      [0, 3]
+    weights:      [-5,3]
+    q:            [-2, 2]
+
+# PID
+pid:
+    simple:       True
+    input_lim:    [-5, 5]
+    n_points:     4000
+    #PID:          [0.8735822376592428, 0.061441163793195155, 0.0028269842479982966]
+    PID:          [4.3, 0.06, 5]
+    dt:           0.033333333
+    
+# GPU
+device: cpu # cuda:0

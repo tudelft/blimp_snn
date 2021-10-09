@@ -1,0 +1,161 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<root version="2.3.8">
+ <tabbed_widget name="Main Window" parent="main_window">
+  <Tab tab_name="All" containers="1">
+   <Container>
+    <DockSplitter orientation="-" count="1" sizes="1">
+     <DockSplitter orientation="|" count="2" sizes="0.500319;0.499681">
+      <DockSplitter orientation="-" count="2" sizes="0.5;0.5">
+       <DockArea name="...">
+        <plot style="Lines" mode="TimeSeries">
+         <range right="2.461005" bottom="2.354590" top="3.704004" left="0.005579"/>
+         <limitY/>
+         <curve name="/radar_targets/target_events.0/range" color="#1a7cc9"/>
+        </plot>
+       </DockArea>
+       <DockArea name="...">
+        <plot style="Lines" mode="TimeSeries">
+         <range right="2.461005" bottom="-0.402905" top="0.208734" left="0.005579"/>
+         <limitY/>
+         <curve name="/radar_targets/target_events.0/speed" color="#39e617"/>
+        </plot>
+       </DockArea>
+      </DockSplitter>
+      <DockSplitter orientation="-" count="2" sizes="0.5;0.5">
+       <DockArea name="...">
+        <plot style="Lines" mode="TimeSeries">
+         <range right="2.461005" bottom="778.181526" top="1332.484306" left="0.005579"/>
+         <limitY/>
+         <curve name="/radar_targets/target_events.0/strength" color="#c9261a"/>
+        </plot>
+       </DockArea>
+       <DockArea name="...">
+        <plot style="Lines" mode="TimeSeries">
+         <range right="2.461005" bottom="-65.840647" top="64.949762" left="0.005579"/>
+         <limitY/>
+         <curve name="/radar_targets/target_events.0/angle" color="#b94aee"/>
+        </plot>
+       </DockArea>
+      </DockSplitter>
+     </DockSplitter>
+    </DockSplitter>
+   </Container>
+  </Tab>
+  <Tab tab_name="Filtered" containers="1">
+   <Container>
+    <DockSplitter orientation="-" count="1" sizes="1">
+     <DockSplitter orientation="|" count="2" sizes="0.500319;0.499681">
+      <DockSplitter orientation="-" count="2" sizes="0.5;0.5">
+       <DockArea name="...">
+        <plot style="Lines" mode="TimeSeries">
+         <range right="19.277119" bottom="0.168293" top="4.885758" left="0.000000"/>
+         <limitY/>
+         <curve name="/radar_filter/target_events.0/range" color="#2787d6"/>
+         <curve name="/radar_filter/range_filter.0" color="#ffeb00"/>
+         <curve name="/blimp/pose/position/z" color="#b41f1f">
+          <transform name="Scale/Offset" alias="/blimp/pose/position/z[Scale/Offset]">
+           <options value_scale="1.0" value_offset="-0.51" time_offset="0"/>
+          </transform>
+         </curve>
+        </plot>
+       </DockArea>
+       <DockArea name="...">
+        <plot style="Lines" mode="TimeSeries">
+         <range right="19.260986" bottom="-0.407759" top="0.407759" left="0.027715"/>
+         <limitY/>
+         <curve name="/radar_filter/target_events.0/speed" color="#1bff00"/>
+        </plot>
+       </DockArea>
+      </DockSplitter>
+      <DockSplitter orientation="-" count="2" sizes="0.5;0.5">
+       <DockArea name="...">
+        <plot style="Lines" mode="TimeSeries">
+         <range right="19.260986" bottom="762.907733" top="1632.863751" left="0.027715"/>
+         <limitY/>
+         <curve name="/radar_filter/target_events.0/strength" color="#ff110e"/>
+        </plot>
+       </DockArea>
+       <DockArea name="...">
+        <plot style="Lines" mode="TimeSeries">
+         <range right="19.260986" bottom="-85.140138" top="74.469347" left="0.027715"/>
+         <limitY/>
+         <curve name="/radar_filter/target_events.0/angle" color="#c569f9"/>
+        </plot>
+       </DockArea>
+      </DockSplitter>
+     </DockSplitter>
+    </DockSplitter>
+   </Container>
+  </Tab>
+  <Tab tab_name="Range" containers="1">
+   <Container>
+    <DockSplitter orientation="-" count="1" sizes="1">
+     <DockArea name="...">
+      <plot style="LinesAndDots" mode="TimeSeries">
+       <range right="27.918226" bottom="0.168293" top="4.885758" left="0.000000"/>
+       <limitY/>
+       <curve name="/radar_filter/target_events.0/range" color="#0097ff"/>
+       <curve name="/radar_filter/range_filter.0" color="#f7ff00"/>
+       <curve name="/blimp/pose/position/z" color="#b41f28">
+        <transform name="Scale/Offset" alias="/blimp/pose/position/z[Scale/Offset]">
+         <options value_scale="1.0" value_offset="-0.51" time_offset="0"/>
+        </transform>
+       </curve>
+      </plot>
+     </DockArea>
+    </DockSplitter>
+   </Container>
+  </Tab>
+  <Tab tab_name="Motors" containers="1">
+   <Container>
+    <DockSplitter orientation="-" count="1" sizes="1">
+     <DockArea name="...">
+      <plot style="Lines" mode="TimeSeries">
+       <range right="0.000000" bottom="-0.100000" top="0.100000" left="0.000000"/>
+       <limitY/>
+       <curve name="/motor_control/ccw_speed" color="#1f77b4"/>
+       <curve name="/motor_control/cw_speed" color="#d62728"/>
+       <curve name="/motor_control/angle" color="#1ac938"/>
+      </plot>
+     </DockArea>
+    </DockSplitter>
+   </Container>
+  </Tab>
+  <currentTabIndex index="2"/>
+ </tabbed_widget>
+ <use_relative_time_offset enabled="1"/>
+ <!-- - - - - - - - - - - - - - - -->
+ <!-- - - - - - - - - - - - - - - -->
+ <Plugins>
+  <plugin ID="DataLoad CSV">
+   <default time_axis=""/>
+  </plugin>
+  <plugin ID="DataLoad ROS bags">
+   <use_header_stamp value="false"/>
+   <use_renaming_rules value="true"/>
+   <discard_large_arrays value="true"/>
+   <max_array_size value="100"/>
+  </plugin>
+  <plugin ID="DataLoad ULog"/>
+  <plugin ID="MQTT Subscriber"/>
+  <plugin ID="ROS Topic Subscriber">
+   <use_header_stamp value="false"/>
+   <use_renaming_rules value="true"/>
+   <discard_large_arrays value="true"/>
+   <max_array_size value="100"/>
+  </plugin>
+  <plugin ID="UDP Server"/>
+  <plugin ID="WebSocket Server"/>
+  <plugin ID="ZMQ Subscriber"/>
+  <plugin ID="ROS /rosout Visualization" status="idle"/>
+  <plugin ID="ROS Topic Re-Publisher" status="idle"/>
+ </Plugins>
+ <!-- - - - - - - - - - - - - - - -->
+ <previouslyLoaded_Datafiles/>
+ <previouslyLoaded_Streamer name="ROS Topic Subscriber"/>
+ <!-- - - - - - - - - - - - - - - -->
+ <customMathEquations/>
+ <snippets/>
+ <!-- - - - - - - - - - - - - - - -->
+</root>
+

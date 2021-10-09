@@ -1,0 +1,15 @@
+<launch>
+    <!-- motor control -->
+    <node machine="pi_client" pkg="motor_control" type="dcmotor" name="subscribe_to_speed" output="screen" launch-prefix="sudo -E">
+        <param name="cw_pwmPin"  value="19" />
+        <param name="cw_dirPin"  value="26" />
+        <param name="ccw_pwmPin" value="12" />
+        <param name="ccw_dirPin" value="21" />
+    </node>
+    <node machine="pi_client" pkg="motor_control" type="servo_ros.py" name="subscribe_to_angle" output="screen">
+        <param name="servoPin" value="17" />
+    </node>
+    <!-- controller -->
+    <node machine="comp_server" pkg="motor_control" type="controller.py" name="controller" output="screen"/>
+
+</launch>

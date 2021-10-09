@@ -1,0 +1,16 @@
+# 
+# Definition of all trackable objects
+# Identifier corresponds to Trackable ID set in Tracking Tools
+#
+rigid_bodies:
+    '1':
+        pose: blimp/pose
+        pose2d: blimp/ground_pose
+        frame_id: blimp/base_link
+
+   #Use this format to create each new rigid body
+
+   #'2':
+   #    pose: rigid_body_2/pose
+   #    pose2d: rigid_body_2/ground_pose
+   #    frame_id: rigid_body_2/base_link

@@ -1,0 +1,4 @@
+<launch>
+    <!-- OptiTrack node -->
+    <include file="$(find mocap_optitrack)/launch/mocap_advanced.launch"/>
+</launch>

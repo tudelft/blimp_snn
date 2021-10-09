@@ -1,0 +1,11 @@
+<launch>
+    <!-- arguments to record -->
+    <arg name="user"               default="marina"/>
+    <arg name="plotjuggler_delay"  default="2.0"/>
+
+    <!-- plotjuggler: real-time plots -->
+    <node machine="comp_server" name="plotjuggler" pkg="plotjuggler" type="plotjuggler" 
+        args="--layout /home/$(arg user)/Pi_Git/ros_radar_mine/myLayout_playAll.xml"
+        launch-prefix="bash -c 'sleep $(arg plotjuggler_delay); $0 $@' ">
+    </node>
+</launch>

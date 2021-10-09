@@ -1,0 +1,15 @@
+<launch> 
+  <node pkg="mocap_optitrack" 
+	type="pose_stamper_1" 
+	name="pose_stamper_1" />
+  
+  <node pkg="mocap_optitrack" 
+	type="mocap_node" 
+	name="mocap_node"
+	respawn="false"
+	launch-prefix=""
+	required="true">
+
+    <rosparam file="$(find mocap_optitrack)/config/mocap.yaml" command="load" />
+  </node>
+</launch>

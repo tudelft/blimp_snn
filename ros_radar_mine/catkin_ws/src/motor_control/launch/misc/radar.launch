@@ -1,0 +1,10 @@
+<launch>
+    <!-- define local server [e.g. computer] and remote client(s) [e.g. Pi0, Pi4,...] machines -->
+    <machine name="pi_client" timeout="20" address="mypi" user="pi" password="raspberry"  env-loader="/home/pi/Pi_Git/ros_radar_mine/catkin_ws/pi_ros_env.sh"/>
+    <machine name="comp_server" address="mycomp"/>
+
+    <!-- radar driver  SHOULDN'T IT BE TYPE = DRIVER IN THIS CASE ¿¿¿¿¿¿¿¿?????????  ################################### -->
+    <node machine="pi_client" pkg="radar_ros_driver" name="radar_ros_driver" type="radar_ros_driver" output="screen"/>
+    <node machine="pi_client" name="radar_ros_filter" pkg="radar_ros_driver" type="radar_ros_filter" output="screen"/>
+
+</launch>
