@@ -1,7 +1,5 @@
 # blimp_snn
 
-{Repo under construction... Will be fully ready soon (: }
-
 ### *Evolved neuromorphic radar-based altitude controller for an autonomous open-source blimp* **official repository**
 
 * Supporting paper: [https://arxiv.org/abs/2110.00646](https://arxiv.org/abs/2110.00646)
@@ -15,14 +13,24 @@ altitude command with an efficient control effort.
 
 ![gondola](media/intro.png)
 
+### Repository Contents
+
+This repository contains the following materials:
+* Assembly guide and bill of materials
+* 3D printing files of the airship platform
+* ROS interface for blimp teleoperation
+* ROS interface for blimp autonomous control: PID, ANN, SNN
+* Evolutionary framework for ANN and SNN training in simulation
+* Radar signal processing algorithm integrated in ROS (*to be added*)
+
 ### Installation
 
 * On the **computer**:
   1. Configure repo:
      ```shell
      cd setup
-     chmod +x radar_mine_install.sh
-     sudo ./radar_mine_install.sh
+     chmod +x install_basics.sh
+     sudo ./install_basics.sh
      ```
      Make sure after this that you have the same folder configuration for *catkin_ws* as the one shown [here](#content-and-folder-structure)
   2. Create a conda environment with Python 2.7:
@@ -51,9 +59,26 @@ altitude command with an efficient control effort.
      ```
   4. Install [PyTorch](https://gist.github.com/akaanirban/621e63237e63bb169126b537d7a1d979), *matplotlib*, and more, as needed.
 
+### Basic Usage
 
+* To teleoperate the airship from the computer keyboard:
+  1. Follow the instructions in [here](/read_me/rpi_ssh_connection/README.md) to connect to the Raspberry Pi via SHH.
+  2. Follow the instructions in [here](/read_me/ros_multiple_machines/README.md) to launch ROS both from the ground station computer and airborne RPi.
+  3. Compile and source the ROS workspace
+     ```shell
+     cd blimp_snn/ros_radar_mine/catkin_ws
+     catkin build
+     source devel/setup.bash
+     ```
+  4. Launch the keyboard teleoperation node and motor control nodes:
+     ```shell
+     roslaunch motor_control motor_control.launch
+     ```
 
 ### Content and Folder Structure
+
+In this section, a detailed view of the final folder structure and function of the available ROs packages + evolutionary
+framework to train ANN and SNN controllers in simulation is delineated.
 
 ```
 .
@@ -63,7 +88,8 @@ altitude command with an efficient control effort.
 ├── read_me                                 # Important READMEs!
 │   ├── radar_wp                                 # Radar processing algorithm: full explanation
 │   ├── ros_cheat_sheet                          # ROS cheatsheet
-│   └── ros_multiple_machines                    # Launching ROS both from computer and Raspberry Pi
+│   ├── ros_multiple_machines                    # Launching ROS both from computer and Raspberry Pi (RPi)
+│   └── rpi_ssh_connection                       # Connecting to RPi through SSH
 │
 ├── ros_radar_mine                          # Where EVERYTHING is DONE
 │   │
@@ -96,7 +122,7 @@ altitude command with an efficient control effort.
 │   ├── cmake_installation.sh                           # CMake installation on RPi
 │   ├── opencv_installation.sh                          # OopenCV installation on RPi
 │   ├── radar_mine_install_basics.sh
-│   ├── radar_mine_install.sh                           # MAIN INSTALLATION FILE: EXECUTE FOR PROPER REPO CONFIG!
+│   ├── install_basics.sh                               # MAIN INSTALLATION FILE: EXECUTE FOR PROPER REPO CONFIG!
 │   ├── radar_position2go_install.sh
 │   ├── ros_kinetic_install.sh                          # ROS Kinetic installation on RPi
 │   └── wpa_supplicant.conf                             # To setup default Wi-Fi connections for the RPi
@@ -108,9 +134,25 @@ altitude command with an efficient control effort.
 
 ### Summary
 
-![gondola](media/gondola.gif)
+The gondola can be 3D printed and is assembled in a modular fashion. Its open configuration makes it
+notably versatile, leaving room for the selection of custom actuators and sensors, which can be easily
+interchanged. Moreover, it merely uses one low-power micro servomotor and two coreless DC motors
+to achieve the three main motion primitives: forward, upward/downward, and yaw motion. The DC
+motors are accommodated on both ends of the rotary shaft, which is controlled by the servo. The
+rotation starts at 0º (upward movement) and can go up to 180º (downward movement). The thrust of
+each of the propellers can be controlled independently, to achieve the desired yaw.
+![gondola](media/gif_blender.gif)
+
+The following image provides a detailed view of the whole assembly schematics for easy replication:
 
 ![gondola](media/circuit.png)
+
+| Component  | Price [$] |  | Component | Price [$] |
+| ------------- | ------------- | --- | ------------- | ------------- |
+| Raspberry Pi W Zero  | 10  | | 8520 Coreless Motors | 8.00 |
+| DRV8833 Motor Driver  | 4.95  | | PowerBoost 500 Basic | 9.95 |
+| Sub-micro Servo SG51R | 5.95 | | 550mA 3.8V Li-Po Battery | 7.95 |
+
 
 For more technical details on the electronic components, their properties and interconnection, please visit
 the following link to [@marina-go-al](https://github.com/marina-go-al) 's master's thesis: [*link to be added here*]
