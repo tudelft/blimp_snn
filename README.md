@@ -155,7 +155,7 @@ The following image provides a detailed view of the whole assembly schematics fo
 
 
 For more technical details on the electronic components, their properties and interconnection, please visit
-the following link to [@marina-go-al](https://github.com/marina-go-al) 's master's thesis: [*link to be added here*]
+this [link](https://repository.tudelft.nl/islandora/object/uuid:0cf0f29d-7bdd-4050-817b-2486ed6461d9) to [@marina-go-al](https://github.com/marina-go-al) 's master's thesis.
 
 ### Citation
 ```
